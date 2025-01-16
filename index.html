@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <title>myCityWeather</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="nav-content">
+        <div class="logo" role="button" tabindex="0">
+          <i class="fas fa-cloud-sun"></i>
+          <span>myCityWeather</span>
+        </div>
+        <button class="hamburger" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <div class="menu">
+          <a href="#home" class="active">Home</a>
+          <a href="#popular">Popular Cities</a>
+          <a href="#about">About</a>
+          <div class="theme-toggle">
+            <button id="themeToggle">
+              <i class="fas fa-moon"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div id="app">
+      <div class="weather-container">
+        <div class="search-box">
+          <div class="search-wrapper">
+            <i class="fas fa-search search-icon"></i>
+            <input 
+              type="text" 
+              id="cityInput" 
+              placeholder="Search for a city..."
+              class="search-input"
+              autocomplete="off"
+            >
+            <div id="searchSuggestions" class="search-suggestions"></div>
+          </div>
+          <button id="searchBtn" class="search-button">
+            <span>Search</span>
+          </button>
+        </div>
+
+        <div class="recent-searches">
+          <h3>Recent Searches</h3>
+          <div id="recentSearches" class="recent-chips"></div>
+        </div>
+
+        <div id="weatherInfo" class="weather-info">
+          <div class="weather-card">
+            <div class="location-info">
+              <h2 id="cityName">--</h2>
+              <p id="dateTime">--</p>
+            </div>
+            
+            <div class="weather-details">
+              <div class="main-weather">
+                <div class="temp">
+                  <i id="weatherIcon" class="fas fa-cloud"></i>
+                  <h3 id="temperature">--°C</h3>
+                </div>
+                <p id="description" class="description">--</p>
+              </div>
+              
+              <div class="additional-info">
+                <div class="info-item">
+                  <i class="fas fa-tint"></i>
+                  <div class="info-text">
+                    <span class="label">Humidity</span>
+                    <span id="humidity">--%</span>
+                  </div>
+                </div>
+                <div class="info-item">
+                  <i class="fas fa-wind"></i>
+                  <div class="info-text">
+                    <span class="label">Wind Speed</span>
+                    <span id="windSpeed">-- km/h</span>
+                  </div>
+                </div>
+                <div class="info-item">
+                  <i class="fas fa-compress-arrows-alt"></i>
+                  <div class="info-text">
+                    <span class="label">Pressure</span>
+                    <span id="pressure">-- hPa</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="map" class="map-container"></div>
+
+        <section id="popular" class="popular-cities">
+          <h2>Popular Cities</h2>
+          <div class="cities-grid">
+            <div class="city-card" data-city="London">
+              <h3>London</h3>
+              <div id="londonTemp">--°C</div>
+            </div>
+            <div class="city-card" data-city="New York">
+              <h3>New York</h3>
+              <div id="newYorkTemp">--°C</div>
+            </div>
+            <div class="city-card" data-city="Tokyo">
+              <h3>Tokyo</h3>
+              <div id="tokyoTemp">--°C</div>
+            </div>
+            <div class="city-card" data-city="Dubai">
+              <h3>Dubai</h3>
+              <div id="dubaiTemp">--°C</div>
+            </div>
+            <div class="city-card" data-city="Singapore">
+              <h3>Singapore</h3>
+              <div id="singaporeTemp">--°C</div>
+            </div>
+            <div class="city-card" data-city="Sydney">
+              <h3>Sydney</h3>
+              <div id="sydneyTemp">--°C</div>
+            </div>
+            <div class="city-card" data-city="Mumbai">
+              <h3>Mumbai</h3>
+              <div id="mumbaiTemp">--°C</div>
+            </div>
+            <div class="city-card" data-city="Paris">
+              <h3>Paris</h3>
+              <div id="parisTemp">--°C</div>
+            </div>
+          </div>
+        </section>
+
+        <section id="about" class="about-section">
+          <h2>About myCityWeather</h2>
+          <div class="about-content">
+            <div class="about-card">
+              <i class="fas fa-globe"></i>
+              <h3>Global Coverage</h3>
+              <p>Access real-time weather information for cities worldwide with accurate data from reliable sources.</p>
+            </div>
+            <div class="about-card">
+              <i class="fas fa-map-marked-alt"></i>
+              <h3>Interactive Maps</h3>
+              <p>Visualize weather patterns and locations with our interactive mapping feature powered by OpenStreetMap.</p>
+            </div>
+            <div class="about-card">
+              <i class="fas fa-history"></i>
+              <h3>Search History</h3>
+              <p>Keep track of your recently searched cities for quick and easy access to weather updates.</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-grid">
+          <div class="footer-section">
+            <h3>About Us</h3>
+            <p>myCityWeather provides accurate weather information for cities worldwide.</p>
+          </div>
+          <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="#home">Home</a></li>
+              <li><a href="#popular">Popular Cities</a></li>
+              <li><a href="#about">About</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3>Connect With Us</h3>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-facebook"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2024 myCityWeather. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
