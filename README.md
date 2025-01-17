@@ -2,6 +2,8 @@
 
 A beautiful and responsive weather application that provides real-time weather information for cities worldwide. Built with modern web technologies and featuring a clean, intuitive interface.
 
+Live Website: https://mycityweathercom.netlify.app/
+
 ## Features ✨
 
 - **Real-time Weather Data**: Get current weather conditions for any city worldwide
